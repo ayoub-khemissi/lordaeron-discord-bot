@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, TextChannel } from "discord.js";
+import { Client, GatewayIntentBits, TextChannel, type Message } from "discord.js";
 import { config, type ChannelName } from "./config.js";
 
 export const client = new Client({
@@ -45,4 +45,36 @@ export async function editMessage(
 
   const message = await channel.messages.fetch(messageId);
   await message.edit(content);
+}
+
+export interface DiscordMessage {
+  id: string;
+  content: string;
+  author: string;
+  createdAt: string;
+}
+
+export async function getMessages(
+  channelName: ChannelName,
+  limit: number = 20,
+  before?: string,
+): Promise<DiscordMessage[]> {
+  const channelId = config.discord.channels[channelName];
+  const channel = await client.channels.fetch(channelId);
+
+  if (!channel || !(channel instanceof TextChannel)) {
+    throw new Error(`Channel "${channelName}" (${channelId}) is not a text channel`);
+  }
+
+  const options: { limit: number; before?: string } = { limit };
+  if (before) options.before = before;
+
+  const messages = await channel.messages.fetch(options);
+
+  return messages.map((m: Message) => ({
+    id: m.id,
+    content: m.content,
+    author: m.author.tag,
+    createdAt: m.createdAt.toISOString(),
+  }));
 }
