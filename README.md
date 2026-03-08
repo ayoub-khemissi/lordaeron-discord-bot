@@ -70,6 +70,38 @@ curl -X POST http://127.0.0.1:3100/api/messages \
 { "success": true, "messageId": "123456789" }
 ```
 
+### `GET /api/messages`
+
+Retrieve previous messages from a channel. Useful to check context and avoid duplicates. Requires `X-API-Key` header.
+
+```bash
+curl http://127.0.0.1:3100/api/messages?channel=changelog&limit=5 \
+  -H "X-API-Key: your-api-key"
+```
+
+**Response:**
+```json
+{ "success": true, "messages": [{ "id": "123", "content": "...", "author": "Lordaeron#2440", "createdAt": "..." }] }
+```
+
+Optional query parameters: `limit` (default 20), `before` (message ID for pagination).
+
+### `PATCH /api/messages/:messageId`
+
+Edit an existing message. Requires `X-API-Key` header.
+
+```bash
+curl -X PATCH http://127.0.0.1:3100/api/messages/123456789 \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: your-api-key" \
+  -d '{"channel": "changelog", "content": "## Patch 1.2 (updated)\n- Fixed Wintergrasp"}'
+```
+
+**Response:**
+```json
+{ "success": true, "messageId": "123456789" }
+```
+
 ### `GET /api/health`
 
 Check bot status. No authentication required.
