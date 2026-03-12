@@ -10,6 +10,7 @@ function required(name: string): string {
 const channelMap = {
   changelog: "DISCORD_CHANNEL_CHANGELOG",
   announcements: "DISCORD_CHANNEL_ANNOUNCEMENTS",
+  alerts: "DISCORD_CHANNEL_ALERTS",
 } as const;
 
 export type ChannelName = keyof typeof channelMap;
