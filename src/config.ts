@@ -11,6 +11,7 @@ const channelMap = {
   changelog: "DISCORD_CHANNEL_CHANGELOG",
   announcements: "DISCORD_CHANNEL_ANNOUNCEMENTS",
   alerts: "DISCORD_CHANNEL_ALERTS",
+  tickets: "DISCORD_CHANNEL_TICKETS",
 } as const;
 
 export type ChannelName = keyof typeof channelMap;
