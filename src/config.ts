@@ -10,8 +10,6 @@ function required(name: string): string {
 const channelMap = {
   changelog: "DISCORD_CHANNEL_CHANGELOG",
   announcements: "DISCORD_CHANNEL_ANNOUNCEMENTS",
-  alerts: "DISCORD_CHANNEL_ALERTS",
-  tickets: "DISCORD_CHANNEL_TICKETS",
   "staff-logs": "DISCORD_CHANNEL_STAFF_LOGS",
   "staff-tickets": "DISCORD_CHANNEL_STAFF_TICKETS",
 } as const;
