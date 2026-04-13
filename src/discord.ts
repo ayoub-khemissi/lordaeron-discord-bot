@@ -5,12 +5,15 @@ import { setupWelcome } from "./welcome.js";
 import { setupAntispam } from "./antispam.js";
 import { initLogger } from "./logger.js";
 
+const privilegedIntents = process.env.DISCORD_PRIVILEGED_INTENTS !== "false";
+
 export const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.MessageContent,
+    ...(privilegedIntents
+      ? [GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent]
+      : []),
   ],
 });
 
