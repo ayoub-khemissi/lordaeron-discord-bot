@@ -1,11 +1,25 @@
 import { Client, GatewayIntentBits, TextChannel, type Message } from "discord.js";
 import { config, type ChannelName } from "./config.js";
+import { setupSecurity } from "./security.js";
+import { setupWelcome } from "./welcome.js";
+import { setupAntispam } from "./antispam.js";
+import { initLogger } from "./logger.js";
 
 export const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 export async function connectDiscord(): Promise<void> {
+  initLogger(client);
+  setupSecurity(client);
+  setupWelcome(client);
+  setupAntispam(client);
+
   return new Promise((resolve, reject) => {
     client.once("ready", () => {
       console.log(`Discord bot connected as ${client.user?.tag}`);
