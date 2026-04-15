@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify";
 import { config } from "../config.js";
 import { sendMessage, editMessage, getMessages, type ChannelName } from "../discord.js";
 
-const VALID_CHANNELS = ["changelog", "announcements", "staff-logs", "staff-tickets"] as const;
+const VALID_CHANNELS = ["welcome", "changelog", "announcements", "rules", "staff-logs", "staff-tickets"] as const;
 
 const bodySchema = {
   type: "object",

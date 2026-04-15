@@ -8,8 +8,10 @@ function required(name: string): string {
 }
 
 const channelMap = {
+  welcome: "DISCORD_CHANNEL_WELCOME",
   changelog: "DISCORD_CHANNEL_CHANGELOG",
   announcements: "DISCORD_CHANNEL_ANNOUNCEMENTS",
+  rules: "DISCORD_CHANNEL_RULES",
   "staff-logs": "DISCORD_CHANNEL_STAFF_LOGS",
   "staff-tickets": "DISCORD_CHANNEL_STAFF_TICKETS",
 } as const;
