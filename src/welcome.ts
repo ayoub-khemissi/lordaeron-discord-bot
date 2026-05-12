@@ -9,7 +9,6 @@ export function setupWelcome(client: Client): void {
     if (AUTO_ROLE_ID) {
       try {
         await member.roles.add(AUTO_ROLE_ID);
-        logger.info("welcome", `Assigned auto-role to ${member.user.tag}`);
       } catch (err) {
         logger.error("welcome", `Failed to assign role to ${member.user.tag}`, String(err));
       }
