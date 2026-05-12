@@ -3,6 +3,7 @@ import { config, type ChannelName } from "./config.js";
 import { setupSecurity } from "./security.js";
 import { setupWelcome } from "./welcome.js";
 import { setupAntispam } from "./antispam.js";
+import { setupAntihijack } from "./antihijack.js";
 import { initLogger } from "./logger.js";
 
 const privilegedIntents = process.env.DISCORD_PRIVILEGED_INTENTS !== "false";
@@ -22,6 +23,7 @@ export async function connectDiscord(): Promise<void> {
   setupSecurity(client);
   setupWelcome(client);
   setupAntispam(client);
+  setupAntihijack(client);
 
   return new Promise((resolve, reject) => {
     client.once("ready", () => {
